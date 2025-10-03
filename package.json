@@ -11,5 +11,8 @@
     "lint": "pnpm --filter guess-the-pokemon-frontend lint",
     "format": "pnpm --filter guess-the-pokemon-frontend format",
     "clean": "pnpm --filter guess-the-pokemon-frontend clean"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0"
   }
 }
