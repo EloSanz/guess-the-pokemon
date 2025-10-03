@@ -1,0 +1,86 @@
+import { useState, useEffect } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { useGameStore } from '@/stores/gameStore'
+
+export default function AuthModal() {
+  const [nickname, setNickname] = useState('')
+  const { setPlayerName, startGame } = useGameStore()
+
+  // Load saved nickname from localStorage
+  useEffect(() => {
+    const savedNickname = localStorage.getItem('pokemon-game-nickname')
+    if (savedNickname) {
+      setNickname(savedNickname)
+    }
+  }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (!nickname.trim() || nickname.length < 3 || nickname.length > 16) {
+      return
+    }
+
+    // Save nickname to localStorage
+    localStorage.setItem('pokemon-game-nickname', nickname.trim())
+
+    // Set player name and start game
+    setPlayerName(nickname.trim())
+    startGame()
+  }
+
+  const isValidNickname = nickname.length >= 3 && nickname.length <= 16
+
+  return (
+    <Dialog open={true} onOpenChange={() => {}}>
+      <DialogContent className="sm:max-w-md" hideCloseButton>
+        <DialogHeader>
+          <DialogTitle className="text-center text-2xl font-bold">
+            🎮 Guess the Pokémon
+          </DialogTitle>
+          <DialogDescription className="text-center">
+            Enter your nickname to start playing
+          </DialogDescription>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="nickname" className="text-sm font-medium">
+              Nickname
+            </label>
+            <Input
+              id="nickname"
+              type="text"
+              placeholder="Enter your nickname (3-16 characters)"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              maxLength={16}
+              autoFocus
+            />
+            {nickname && !isValidNickname && (
+              <p className="text-sm text-destructive">
+                Nickname must be 3-16 characters long
+              </p>
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!isValidNickname}
+          >
+            Start Game
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}

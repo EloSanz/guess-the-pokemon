@@ -1,0 +1,23 @@
+FROM node:20-alpine
+
+# Install pnpm
+RUN npm install -g pnpm
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml* ./
+COPY backend/package.json ./backend/
+COPY shared/package.json ./shared/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy backend and shared source
+COPY backend ./backend
+COPY shared ./shared
+COPY public ./public
+
+EXPOSE 3001
+
+CMD ["pnpm", "--filter backend", "dev"]

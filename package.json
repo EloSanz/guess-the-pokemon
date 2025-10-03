@@ -1,0 +1,15 @@
+{
+  "name": "guess-the-pokemon",
+  "version": "1.0.0",
+  "description": "Simple Pokemon guessing game built with React",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter guess-the-pokemon-frontend dev",
+    "build": "pnpm --filter guess-the-pokemon-frontend build",
+    "preview": "pnpm --filter guess-the-pokemon-frontend preview",
+    "lint": "pnpm --filter guess-the-pokemon-frontend lint",
+    "format": "pnpm --filter guess-the-pokemon-frontend format",
+    "clean": "pnpm --filter guess-the-pokemon-frontend clean"
+  }
+}
