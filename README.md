@@ -126,7 +126,15 @@ pnpm clean        # Clean build artifacts
 
 ## Deployment
 
-### Production Build
+### Automatic Deployment (Recommended)
+
+The project includes GitHub Actions for automatic deployment:
+
+1. **Vercel**: Connect your repo to Vercel for automatic deployments
+2. **Netlify**: Connect your repo to Netlify for automatic deployments
+3. **GitHub Pages**: Use the build artifacts from GitHub Actions
+
+### Manual Deployment
 
 ```bash
 # Build for production
@@ -135,11 +143,24 @@ pnpm build
 # Preview locally
 pnpm preview
 
-# Deploy the 'dist' folder to any static hosting service
-# (Netlify, Vercel, GitHub Pages, etc.)
+# Deploy the 'frontend/dist' folder to any static hosting service
 ```
 
-The game is a single-page application that can be hosted on any static file server.
+### Deployment Options
+
+#### Vercel (Recommended)
+1. Connect your GitHub repo to Vercel
+2. Vercel will automatically detect the configuration and deploy
+
+#### Netlify
+1. Connect your GitHub repo to Netlify
+2. Netlify will use the `netlify.toml` configuration
+
+#### Other Platforms
+The game is a single-page application that can be hosted on any static file server (GitHub Pages, Firebase, etc.).
+
+### Environment Variables
+No environment variables are required for basic functionality.
 
 ## Contributing
 
