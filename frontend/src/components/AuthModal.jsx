@@ -41,7 +41,7 @@ export default function AuthModal() {
 
   return (
     <Dialog open={true} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-md" hideCloseButton>
+      <DialogContent className="sm:max-w-md [&>button]:hidden">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold">
             🎮 Guess the Pokémon
