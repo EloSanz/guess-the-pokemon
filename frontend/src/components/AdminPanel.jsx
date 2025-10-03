@@ -7,7 +7,7 @@ import { useSocket } from '@/hooks/useSocket'
 
 export default function AdminPanel() {
   const { isAdminConnected, currentRound } = useGameStore()
-  const { isAdmin, adminLogin, adminLogout, revealHint, revealAnswer, startRound } = useSocket()
+  const { isAdmin, adminLogin, adminLogout, sendRevealHint, sendRevealAnswer, sendStartRound } = useSocket()
   const [password, setPassword] = useState('')
   const [showLogin, setShowLogin] = useState(!isAdmin)
 
@@ -94,7 +94,7 @@ export default function AdminPanel() {
 
         {!currentRound && (
           <Button
-            onClick={startRound}
+            onClick={sendStartRound}
             className="w-full"
             disabled={!isAdminConnected}
           >
@@ -105,7 +105,7 @@ export default function AdminPanel() {
         {currentRound && !currentRound.revealed && (
           <>
             <Button
-              onClick={revealHint}
+              onClick={sendRevealHint}
               className="w-full"
               variant="secondary"
               disabled={!isAdminConnected}
@@ -114,7 +114,7 @@ export default function AdminPanel() {
             </Button>
 
             <Button
-              onClick={revealAnswer}
+              onClick={sendRevealAnswer}
               className="w-full"
               variant="destructive"
               disabled={!isAdminConnected}

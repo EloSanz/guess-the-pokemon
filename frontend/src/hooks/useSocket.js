@@ -35,9 +35,9 @@ export function useSocket() {
   const {
     setConnectionStatus,
     updateGameState,
-    revealHint,
-    revealAnswer,
-    startRound,
+    updateRevealHint: revealHint,
+    updateRevealAnswer: revealAnswer,
+    updateStartRound: startRound,
   } = useGameStore()
 
   useEffect(() => {
@@ -158,19 +158,19 @@ export function useSocket() {
     setIsAdmin(false)
   }
 
-  const revealHint = () => {
+  const sendRevealHint = () => {
     if (!socketRef.current || !isAdmin) return
 
     socketRef.current.emit(EVENTS.ADMIN_REVEAL_HINT)
   }
 
-  const revealAnswer = () => {
+  const sendRevealAnswer = () => {
     if (!socketRef.current || !isAdmin) return
 
     socketRef.current.emit(EVENTS.ADMIN_REVEAL_ANSWER)
   }
 
-  const startRound = () => {
+  const sendStartRound = () => {
     if (!socketRef.current || !isAdmin) return
 
     socketRef.current.emit(EVENTS.ADMIN_START_ROUND)
@@ -185,8 +185,8 @@ export function useSocket() {
     submitGuess,
     adminLogin,
     adminLogout,
-    revealHint,
-    revealAnswer,
-    startRound,
+    sendRevealHint,
+    sendRevealAnswer,
+    sendStartRound,
   }
 }
