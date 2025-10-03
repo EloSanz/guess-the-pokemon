@@ -218,7 +218,7 @@ export const useGameStore = create(
       },
 
       // Computed values
-      get canGuess: () => {
+      get canGuess() {
         const { player, currentRound, roundTimeRemaining } = get()
         if (!currentRound || currentRound.revealed) return false
 
@@ -228,7 +228,7 @@ export const useGameStore = create(
         return timeSinceLastGuess >= GUESS_COOLDOWN
       },
 
-      get guessCooldownRemaining: () => {
+      get guessCooldownRemaining() {
         const { player } = get()
         const now = Date.now()
         const timeSinceLastGuess = now - player.lastGuessTime
