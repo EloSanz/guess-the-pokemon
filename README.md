@@ -4,11 +4,14 @@ A simple single-player Pokémon guessing game built with React. Guess Pokémon n
 
 ## Features
 
+- **Real-time multiplayer**: Multiple players can join and play simultaneously
 - **Progressive hints**: Emoji → Text → Pixelated sprite revealed over time
+- **Admin controls**: Special admin can manually reveal hints and answers for all players
 - **Scoring system**: Points based on correct guesses with streak bonuses
 - **Round-based gameplay**: 90-second rounds with automatic progression
-- **Simple UI**: Clean, responsive interface built with Tailwind CSS
-- **Local gameplay**: No server required - runs entirely in the browser
+- **Live synchronization**: All players see the same game state in real-time
+- **Responsive UI**: Clean, modern interface built with Tailwind CSS + shadcn/ui
+- **Admin authentication**: Secure admin login with password protection
 - **Anti-abuse**: Cooldown system and input validation
 
 ## Tech Stack
@@ -37,10 +40,20 @@ A simple single-player Pokémon guessing game built with React. Guess Pokémon n
    pnpm dev
    ```
 
+   This will start both the backend server (port 3001) and frontend (port 5173).
+
 3. **Open your browser:**
    Visit http://localhost:5173
 
-That's it! The game runs entirely in your browser with no backend required.
+### Admin Access
+
+To become an admin and control the game:
+
+1. Click the "Admin Panel" button in the header
+2. Enter password: `admin123`
+3. Use the admin controls to reveal hints and answers for all players
+
+**Note**: Only one admin can be connected at a time.
 
 ### Building for Production
 
