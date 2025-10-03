@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useGameStore } from '@/stores/gameStore'
+import { useSocket } from '@/hooks/useSocket'
 
 export default function GuessInput() {
   const [guess, setGuess] = useState('')
-  const { submitGuess, canGuess, guessCooldownRemaining } = useGameStore()
+  const { canGuess } = useGameStore()
+  const { submitGuess } = useSocket()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -45,9 +47,9 @@ export default function GuessInput() {
           </Button>
         </div>
 
-        {!canGuess && guessCooldownRemaining > 0 && (
+        {!canGuess && (
           <p className="text-sm text-muted-foreground text-center">
-            Cooldown: {guessCooldownRemaining} seconds remaining
+            Round is active - wait for your turn or next hint
           </p>
         )}
       </form>

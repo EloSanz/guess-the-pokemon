@@ -5,14 +5,18 @@
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "pnpm --filter guess-the-pokemon-frontend dev",
+    "dev": "concurrently \"pnpm --filter guess-the-pokemon-backend dev\" \"pnpm --filter guess-the-pokemon-frontend dev\"",
+    "dev:frontend": "pnpm --filter guess-the-pokemon-frontend dev",
+    "dev:backend": "pnpm --filter guess-the-pokemon-backend dev",
     "build": "pnpm --filter guess-the-pokemon-frontend build",
+    "start": "pnpm --filter guess-the-pokemon-backend start",
     "preview": "pnpm --filter guess-the-pokemon-frontend preview",
-    "lint": "pnpm --filter guess-the-pokemon-frontend lint",
-    "format": "pnpm --filter guess-the-pokemon-frontend format",
-    "clean": "pnpm --filter guess-the-pokemon-frontend clean"
+    "lint": "pnpm --filter guess-the-pokemon-frontend lint && pnpm --filter guess-the-pokemon-backend lint",
+    "format": "pnpm --filter guess-the-pokemon-frontend format && pnpm --filter guess-the-pokemon-backend format",
+    "clean": "pnpm --filter guess-the-pokemon-frontend clean",
+    "install:all": "pnpm install"
   },
-  "dependencies": {
-    "@radix-ui/react-slot": "^1.1.0"
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

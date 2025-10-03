@@ -7,6 +7,7 @@ export { ScrollArea } from './ui/scroll-area'
 export { Toaster } from './ui/toaster'
 
 // Game Components
+export { default as AdminPanel } from './AdminPanel'
 export { default as AuthModal } from './AuthModal'
 export { default as GameCard } from './GameCard'
 export { default as GuessInput } from './GuessInput'

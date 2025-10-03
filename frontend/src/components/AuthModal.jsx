@@ -9,10 +9,12 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useGameStore } from '@/stores/gameStore'
+import { useSocket } from '@/hooks/useSocket'
 
 export default function AuthModal() {
   const [nickname, setNickname] = useState('')
-  const { setPlayerName, startGame } = useGameStore()
+  const { setPlayerName } = useGameStore()
+  const { joinGame, isConnected } = useSocket()
 
   // Load saved nickname from localStorage
   useEffect(() => {
@@ -25,16 +27,17 @@ export default function AuthModal() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!nickname.trim() || nickname.length < 3 || nickname.length > 16) {
+    if (!nickname.trim() || nickname.length < 3 || nickname.length > 16 || !isConnected) {
       return
     }
 
     // Save nickname to localStorage
     localStorage.setItem('pokemon-game-nickname', nickname.trim())
 
-    // Set player name and start game
-    setPlayerName(nickname.trim())
-    startGame()
+    // Set player name and join game
+    const cleanNickname = nickname.trim()
+    setPlayerName(cleanNickname)
+    joinGame(cleanNickname)
   }
 
   const isValidNickname = nickname.length >= 3 && nickname.length <= 16
@@ -75,9 +78,9 @@ export default function AuthModal() {
           <Button
             type="submit"
             className="w-full"
-            disabled={!isValidNickname}
+            disabled={!isValidNickname || !isConnected}
           >
-            Start Game
+            {isConnected ? 'Join Game' : 'Connecting...'}
           </Button>
         </form>
       </DialogContent>
